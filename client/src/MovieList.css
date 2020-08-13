@@ -1,0 +1,25 @@
+table {
+	border-spacing: 5em 1em;
+	margin: 4em auto;
+}
+
+th {
+	text-align: left;
+}
+
+td:nth-child(1){
+	font-weight: lighter;
+	font-style: italic;
+}
+
+svg {
+	color: grey;
+}
+
+.edit:hover  {
+	color: green;
+}
+
+.delete:hover {
+	color: red;
+}

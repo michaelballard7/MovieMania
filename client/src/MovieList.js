@@ -1,5 +1,7 @@
 import React from 'react'
-
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import './MovieList.css'
 
 class MovieList extends React.Component {
 
@@ -20,7 +22,12 @@ class MovieList extends React.Component {
 	render(){
 		let movies = this.state.movies.map( (movie, index) => {
 				return (
-					<tr key={movie.id}><td>{movie.title}</td><td>{movie.release_date}</td></tr>
+					<tr key={movie.id}>
+						<td>{movie.title}</td>
+						<td>{movie.release_date}</td>
+						<td> <EditIcon className="edit" /></td>
+						<td> <DeleteIcon className="delete" /></td>
+					</tr>
 				 )
 			});
 

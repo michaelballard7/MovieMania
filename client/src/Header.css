@@ -7,6 +7,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
+
 .header>ul {
 	display: inline;
 	margin: 0;
@@ -31,10 +32,8 @@ li > a {
 }
 
 .header>ul>li.logo {
-	
 	font-size: 2em;
 	margin-left: .5em;
-
 }
 
 .header-left {
