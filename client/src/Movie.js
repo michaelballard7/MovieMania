@@ -96,11 +96,21 @@ class Movie extends React.Component {
 			axiosRestCall(url, movie)
 			. then( res => {
 				this.setState({created: true})
-				toast.success(" 🦄 Successfully created", {
+				if(id){
+					toast.success(" 🦄 Successfully updated", {
 					autoclose:3000,
 					closeOnClick:true,
 					hideProgressBar: true,
 				})
+
+				}else{
+					toast.success(" 🦄 Successfully created", {
+					autoclose:3000,
+					closeOnClick:true,
+					hideProgressBar: true,
+				})
+				}
+				
 			})
 			.catch(err => console.log(err))
 		}
