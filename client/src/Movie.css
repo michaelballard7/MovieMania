@@ -1,0 +1,30 @@
+
+form {
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 1em;
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 8em;
+}
+
+input {
+	border: 1px lightgrey solid;
+}
+
+input[type="submit"] {
+	grid-column: 2/3;
+	background-color: lightgrey;
+	justify-self: end;
+	width: 100px;
+}
+
+input[type="text"] {
+	width: 300px;
+}
+
+label {
+	text-align: right;
+}
