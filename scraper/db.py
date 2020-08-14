@@ -4,6 +4,10 @@ import datetime
 
 conn = sqlite3.connect('data.db',check_same_thread=False)
 
+
+
+conn2 = mysql.connector.connect(host='localhost',database='movies', user='root')
+
 # conn.row_factory = sqlite3.Row
 
 def create_tables():

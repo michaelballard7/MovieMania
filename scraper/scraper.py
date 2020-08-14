@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 import pandas as pd 
 import requests 
-import db
+import db2
 
 
 url = "https://www.imdb.com/chart/top/?ref_=nv_mv_250"
@@ -20,5 +20,5 @@ for row in rows:
     published = row.find("td",{"class":"titleColumn"}).find("span").get_text()
     published = published.replace("(","").replace(")","").strip()
     published = "01-01-"+published
-    db.add_movie(title, published)
+    db2.add_movie(title, published)
     
