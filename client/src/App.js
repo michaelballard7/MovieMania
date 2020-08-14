@@ -22,6 +22,9 @@ function App() {
 	    		<Route path="/add">
 	    			<Movie />
 	    		</Route>
+	    		<Route path="/edit/:id">
+	    			<Movie />
+	    		</Route>
 	    	</Switch>
 	    </div>
    	</Router>

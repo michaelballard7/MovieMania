@@ -1,12 +1,25 @@
 import React from 'react';
-import {Redirect} from 'react-router';
+import {Redirect, withRouter} from 'react-router';
 import './Movie.css';
 import axios from 'axios';
-import {toast } from 'react-toastify';
-
+import {toast} from 'react-toastify';
 
 
 class Movie extends React.Component {
+
+	constructor(props){
+		super(props);
+
+		console.log(props);
+
+		this.state = {
+			id: props.match.params.id,
+			title: '',
+			release_date: ''
+		}
+		this.onChangeHandler = this.onChangeHandler.bind(this)
+		this.onSubmitHandler = this.onSubmitHandler.bind(this)
+	}
 
 	validation = {
 		title : {
@@ -20,24 +33,12 @@ class Movie extends React.Component {
 		}
 	}
 
-	constructor(props){
-		super(props);
-
-		this.state = {
-			title: '',
-			release_date: ''
-		}
-		this.onChangeHandler = this.onChangeHandler.bind(this)
-		this.onSubmitHandler = this.onSubmitHandler.bind(this)
-	}
-
+	
 	validate(){
 
 		let valid = true
 
 		for(let field in this.validation){
-
-			console.log(field)
 
 			const rule = this.validation[field].rule;
 			const message = this.validation[field].message;
@@ -75,24 +76,52 @@ class Movie extends React.Component {
 
 		if(this.validate()){
 
-			let {title, release_date} = this.state
+			let {id, title, release_date} = this.state
 
 			const movie = {
+				id:id,
 				title:title,
 				release_date:release_date
 			}
 
-			axios.post(process.env.REACT_APP_SERVER_URL, movie)
+			let axiosRestCall = axios.post;
+
+			let url = process.env.REACT_APP_SERVER_URL
+
+			if (id){
+				axiosRestCall = axios.put
+				url += "/" + id;
+			}
+
+			axiosRestCall(url, movie)
 			. then( res => {
 				this.setState({created: true})
 				toast.success(" 🦄 Successfully created", {
 					autoclose:3000,
-					closeOnClick:true
+					closeOnClick:true,
+					hideProgressBar: true,
 				})
 			})
 			.catch(err => console.log(err))
 		}
 
+	}
+
+	componentDidMount(){
+		if(!this.state.id){
+			return
+		}
+
+		axios.get(process.env.REACT_APP_SERVER_URL + '/' + this.state.id)
+		.then(res => {
+			let {title, release_date} = res.data[0]
+
+			this.setState({
+				title:title,
+				release_date: release_date
+			})
+		})
+		.catch(err => console.log(err))
 	}
 
 	render(){
@@ -116,4 +145,4 @@ class Movie extends React.Component {
 }
 
 
-export default Movie;
+export default withRouter(Movie);
